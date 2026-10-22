@@ -7,7 +7,7 @@ public class ProductoService : IProductoService
 {
  private readonly ApplicationDbContext _db;
  public ProductoService(ApplicationDbContext db) => _db=db;
- // filtro busca por nombre o categoría (extensión opcional del enunciado).
+ // filtro busca por nombre o categoria
  public Task<List<Producto>> ListarAsync(string? filtro,UnidadMedida? unidad)
  {
   var q=_db.Productos.AsNoTracking().AsQueryable();
