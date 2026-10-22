@@ -1,7 +1,19 @@
+using Microsoft.EntityFrameworkCore;
+using CasoPractico1_PrograAvanzada.Data;
+using CasoPractico1_PrograAvanzada.Services;
+using CasoPractico1_PrograAvanzada.Services.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Base de datos
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Servicios
+builder.Services.AddScoped<IProductoService, ProductoService>();
 
 var app = builder.Build();
 
