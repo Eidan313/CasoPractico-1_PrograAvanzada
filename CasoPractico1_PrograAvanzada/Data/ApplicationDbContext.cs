@@ -19,7 +19,6 @@ namespace CasoPractico1_PrograAvanzada.Data
             ConfigurarProductos(modelBuilder);
         }
 
-        // Una sola tabla para productos por unidad y por peso; TipoVenta los distingue.
         private static void ConfigurarProductos(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Producto>(entity =>
@@ -28,19 +27,18 @@ namespace CasoPractico1_PrograAvanzada.Data
                 {
                     t.HasCheckConstraint("CK_Productos_Precio", "[Precio] > 0");
                     t.HasCheckConstraint("CK_Productos_Existencia", "[Existencia] BETWEEN 0 AND 9999");
-                    t.HasCheckConstraint("CK_Productos_TipoVenta", "[TipoVenta] IN (1, 2)");
+                    t.HasCheckConstraint("CK_Productos_UnidadMedida", "[UnidadMedida] IN (1, 2, 3)");
                 });
 
                 entity.Property(p => p.Precio).HasPrecision(18, 2);
 
-                // 3 decimales para los productos por peso (gramos).
+                // 3 decimales para kilogramos y litros.
                 entity.Property(p => p.Existencia).HasPrecision(10, 3);
 
                 entity.HasIndex(p => p.Codigo).IsUnique();
                 entity.HasIndex(p => p.Nombre);
-
-                entity.Ignore(p => p.UnidadMedida);
             });
         }
+
     }
 }

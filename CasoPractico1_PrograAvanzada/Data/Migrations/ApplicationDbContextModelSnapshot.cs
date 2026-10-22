@@ -55,7 +55,7 @@ namespace CasoPractico1_PrograAvanzada.Data.Migrations
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("TipoVenta")
+                    b.Property<int>("UnidadMedida")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -71,7 +71,7 @@ namespace CasoPractico1_PrograAvanzada.Data.Migrations
 
                             t.HasCheckConstraint("CK_Productos_Precio", "[Precio] > 0");
 
-                            t.HasCheckConstraint("CK_Productos_TipoVenta", "[TipoVenta] IN (1, 2)");
+                            t.HasCheckConstraint("CK_Productos_UnidadMedida", "[UnidadMedida] IN (1, 2, 3)");
                         });
                 });
 #pragma warning restore 612, 618
