@@ -36,3 +36,16 @@ GO
 
 CREATE INDEX IX_Productos_Nombre ON dbo.Productos (Nombre);
 GO
+
+-- Migraciones
+CREATE TABLE dbo.__EFMigrationsHistory (
+    MigrationId     NVARCHAR(150)       NOT NULL,
+    ProductVersion  NVARCHAR(32)        NOT NULL,
+    CONSTRAINT PK___EFMigrationsHistory PRIMARY KEY (MigrationId)
+);
+GO
+
+INSERT INTO dbo.__EFMigrationsHistory (MigrationId, ProductVersion) VALUES
+    (N'20261022004600_Inicial', N'9.0.6'),
+    (N'20261022012918_UnidadMedida', N'9.0.6');
+GO
