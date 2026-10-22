@@ -20,14 +20,14 @@ CREATE TABLE dbo.Productos (
     Codigo      NVARCHAR(12)        NOT NULL,
     Nombre      NVARCHAR(80)        NOT NULL,
     Categoria   NVARCHAR(40)        NOT NULL,
-    TipoVenta   INT                 NOT NULL,
+    UnidadMedida INT                NOT NULL,
     Precio      DECIMAL(18,2)       NOT NULL,
     Existencia  DECIMAL(10,3)       NOT NULL,
     Activo      BIT                 NOT NULL,
     CONSTRAINT PK_Productos PRIMARY KEY (Id),
     CONSTRAINT CK_Productos_Existencia CHECK ([Existencia] BETWEEN 0 AND 9999),
     CONSTRAINT CK_Productos_Precio CHECK ([Precio] > 0),
-    CONSTRAINT CK_Productos_TipoVenta CHECK ([TipoVenta] IN (1, 2))
+    CONSTRAINT CK_Productos_UnidadMedida CHECK ([UnidadMedida] IN (1, 2, 3))
 );
 GO
 
@@ -35,4 +35,17 @@ CREATE UNIQUE INDEX IX_Productos_Codigo ON dbo.Productos (Codigo);
 GO
 
 CREATE INDEX IX_Productos_Nombre ON dbo.Productos (Nombre);
+GO
+
+-- Migraciones
+CREATE TABLE dbo.__EFMigrationsHistory (
+    MigrationId     NVARCHAR(150)       NOT NULL,
+    ProductVersion  NVARCHAR(32)        NOT NULL,
+    CONSTRAINT PK___EFMigrationsHistory PRIMARY KEY (MigrationId)
+);
+GO
+
+INSERT INTO dbo.__EFMigrationsHistory (MigrationId, ProductVersion) VALUES
+    (N'20261022004600_Inicial', N'9.0.6'),
+    (N'20261022012918_UnidadMedida', N'9.0.6');
 GO
