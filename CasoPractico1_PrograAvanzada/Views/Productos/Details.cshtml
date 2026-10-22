@@ -1,0 +1,45 @@
+@model Producto
+
+@{
+    ViewData["Title"] = "Detalle del producto";
+}
+
+<h1 class="h3">Detalle del producto</h1>
+<hr />
+
+<dl class="row">
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Codigo)</dt>
+    <dd class="col-sm-9">@Model.Codigo</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Nombre)</dt>
+    <dd class="col-sm-9">@Model.Nombre</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Categoria)</dt>
+    <dd class="col-sm-9">@Model.Categoria</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.UnidadMedida)</dt>
+    <dd class="col-sm-9">@Model.UnidadMedida</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Precio)</dt>
+    <dd class="col-sm-9">₡@Model.Precio.ToString("N2") por @Model.UnidadMedida.ToString().ToLower()</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Existencia)</dt>
+    <dd class="col-sm-9">@Model.Existencia.ToString("0.###") @Model.UnidadMedida.ToString().ToLower()</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Activo)</dt>
+    <dd class="col-sm-9">
+        @if (Model.Activo)
+        {
+            <span class="badge bg-success">Activo</span>
+        }
+        else
+        {
+            <span class="badge bg-secondary">Inactivo</span>
+        }
+    </dd>
+</dl>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+    <a asp-action="Index" class="btn btn-outline-secondary">Volver al listado</a>
+</div>

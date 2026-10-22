@@ -1,0 +1,20 @@
+@model Producto
+
+@{
+    ViewData["Title"] = "Nuevo producto";
+}
+
+<h1 class="h3">Nuevo producto</h1>
+<hr />
+
+<div class="row">
+    <div class="col-lg-8">
+        <form asp-action="Create" method="post">
+            <partial name="_Form" model="Model" />
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
